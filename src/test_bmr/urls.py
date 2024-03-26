@@ -22,6 +22,7 @@ v1_api = (
     [
         path('account/', include('account.urls')),
         path('product/', include('product.urls')),
+        path('order/', include('order.urls')),
     ], 'v1',
 )
 
