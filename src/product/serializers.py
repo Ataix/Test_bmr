@@ -5,6 +5,9 @@ from .models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """
+    Serializer for product
+    """
     class Meta:
         model = Product
         fields = (
@@ -18,6 +21,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductCreateUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for product creation and updating
+    """
     class Meta:
         model = Product
         fields = (
@@ -30,6 +36,11 @@ class ProductCreateUpdateSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
+        """
+        Validating price and quantity for product creation
+        :param validated_data:
+        :return:
+        """
         if float(validated_data['price']) < 0:
             raise ValidationError(
                 'Invalid price. Should be greater or equal to zero'
@@ -42,6 +53,12 @@ class ProductCreateUpdateSerializer(serializers.ModelSerializer):
         return product
 
     def update(self, instance, validated_data):
+        """
+        Validating price and quantity for product updating
+        :param instance:
+        :param validated_data:
+        :return:
+        """
         if 'price' in validated_data and float(validated_data['price']) < 0:
             raise ValidationError(
                 'Invalid price. Should be greater or equal to zero'
