@@ -22,7 +22,7 @@ class Order(models.Model):
     """
     Represents an order build by users
     """
-    user = models.ForeignKey(User,  on_delete=models.CASCADE)
+    user = models.ForeignKey(User,  on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=255)
     comment = models.TextField(blank=True)

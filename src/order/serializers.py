@@ -36,6 +36,8 @@ class OrderSerializer(serializers.ModelSerializer):
         """
         request = self.context.get('request')
         items = validated_data.pop('items')
+        print(validated_data)
+        print(request)
         order = Order.objects.create(**validated_data)
         order.user = request.user
         order.save()

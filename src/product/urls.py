@@ -16,7 +16,6 @@ urlpatterns = [
     path('<int:pk>/reviews/', ReviewViewSet.as_view({
         'post': 'create',
         'get': 'retrieve',
-        'put': 'update',
         'patch': 'partial_update',
         'delete': 'destroy',
     })),

@@ -23,6 +23,10 @@ class ReviewSerializer(serializers.ModelSerializer):
             'rate',
         )
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return representation
+
 
 class ReviewCreateUpdateSerializer(serializers.ModelSerializer):
     """
@@ -86,13 +90,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'quantity',
             'price',
         )
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['reviews'] = ReviewSerializer(
-            instance.reviews.all(), many=True
-        ).data
-        return representation
 
 
 class ProductCreateUpdateSerializer(serializers.ModelSerializer):

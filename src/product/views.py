@@ -8,7 +8,7 @@ from rest_framework.viewsets import ViewSetMixin
 from .filters import ProductFilter
 from .models import Product, Review
 from .serializers import (
-    ProductSerializer, ProductCreateUpdateSerializer, ReviewSerializer
+    ProductSerializer, ProductCreateUpdateSerializer, ReviewSerializer,
 )
 from .utils import IsOwnerReview
 
