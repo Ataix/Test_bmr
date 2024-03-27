@@ -6,8 +6,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ViewSetMixin
 
 from .filters import ProductFilter
-from .models import Product
-from .serializers import ProductSerializer, ProductCreateUpdateSerializer
+from .models import Product, Review
+from .serializers import (
+    ProductSerializer, ProductCreateUpdateSerializer, ReviewSerializer
+)
+from .utils import IsOwnerReview
 
 
 class ProductListView(ListAPIView):
@@ -60,3 +63,24 @@ class ProductViewSet(ViewSetMixin,
         return [permission() for permission in permissions]
 
 
+class ReviewViewSet(ViewSetMixin,
+                    CreateAPIView,
+                    RetrieveAPIView,
+                    UpdateAPIView,
+                    DestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def get_permissions(self):
+        permissions = []
+        if self.action == 'retrieve':
+            permissions = []
+        elif self.action == 'create':
+            permissions = [IsAuthenticated]
+        elif self.action in ['update', 'partial_update', 'destroy']:
+            permissions = [IsOwnerReview]
+        return [permission() for permission in permissions]
