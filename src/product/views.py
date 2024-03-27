@@ -71,11 +71,23 @@ class ReviewViewSet(ViewSetMixin,
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
+    """
+    Viewset for Review object
+    """
 
     def perform_create(self, serializer):
+        """
+        Saving current user into review
+        :param serializer:
+        :return:
+        """
         serializer.save(author=self.request.user)
 
     def get_permissions(self):
+        """
+        Modified permissions for review
+        :return:
+        """
         permissions = []
         if self.action == 'retrieve':
             permissions = []

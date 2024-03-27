@@ -11,9 +11,9 @@ client = APIClient()
 User = get_user_model()
 
 
-class TestOrderViews(TestCase):
+class TestAuthViews(TestCase):
     """
-    Test product's list view
+    Test if JWT auth
     """
     def setUp(self):
         self.test_user = User.objects.create_user(
@@ -53,5 +53,3 @@ class TestOrderViews(TestCase):
             f'/api/v1/product/list/',
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-

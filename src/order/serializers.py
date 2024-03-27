@@ -4,6 +4,9 @@ from .models import OrderItem, Order
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    """
+    Order Item Serializer
+    """
     class Meta:
         model = OrderItem
         fields = (
@@ -15,6 +18,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    """
+    Order serializer
+    """
     items = OrderItemSerializer(many=True)
 
     class Meta:

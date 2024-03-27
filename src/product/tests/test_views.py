@@ -82,6 +82,9 @@ class TestProductDetailView(TestCase):
 
 
 class TestCaseBase(APITestCase):
+    """
+    Creating auth token for further testing
+    """
     @property
     def bearer_token(self):
         self.test_user = User.objects.create_user(
@@ -245,6 +248,9 @@ class TestProductDeleteView(TestCaseBase):
 
 
 class TestReviewCreateView(TestCaseBase):
+    """
+    Review's creation view testing
+    """
     def setUp(self):
         self.product_1 = Product.objects.create(
             name='Test Product 1',
@@ -322,6 +328,9 @@ class TestReviewUpdateView(TestCaseBase):
 
 
 class TestReviewDeleteView(TestCaseBase):
+    """
+    Review's delete view testing
+    """
     def setUp(self):
         self.test_user = User.objects.create_user(
             username='test_user_1', password='<PASSWORD>'

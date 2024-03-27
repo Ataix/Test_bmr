@@ -5,6 +5,9 @@ User = get_user_model()
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    """
+    Serializer for registration process
+    """
     password = serializers.CharField(min_length=6, write_only=True)
     password_confirm = serializers.CharField(min_length=6, write_only=True)
 
@@ -18,6 +21,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, attrs):
+        """
+        Validate the pair of passwords
+        :param attrs:
+        :return:
+        """
         password = attrs.get('password')
         password_confirm = attrs.pop('password_confirm')
         if password != password_confirm:
@@ -25,6 +33,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
+        """
+        User creation
+        :param validated_data:
+        :return:
+        """
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
@@ -33,6 +46,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Basic user serializer
+    """
     class Meta:
         model = User
         fields = '__all__'

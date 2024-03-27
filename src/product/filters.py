@@ -5,7 +5,7 @@ from .models import Product
 
 class ProductFilter(django_filters.FilterSet):
     """
-    Filtering product model
+    Custom Filtering product model
     """
     price_from = django_filters.NumberFilter(field_name='price', lookup_expr='gte')
     price_to = django_filters.NumberFilter(field_name='price', lookup_expr='lte')
