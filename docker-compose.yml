@@ -33,19 +33,5 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-#  test:
-#    build: .
-#    command: python manage.py test
-#    volumes:
-#      - .:/app
-#    depends_on:
-#      - db
-#    env_file:
-#      - ./.env.dev
-#    environment:
-#      - POSTGRES_DB=app
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=supersecretpassword
-
 volumes:
   pgdata:
